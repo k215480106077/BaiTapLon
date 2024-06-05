@@ -20,7 +20,7 @@ Quản lý tài khoản trong một quán net có thể được thực hiện q
 
 # Yêu cầu thực hiện:
 -Tạo bảng Quản Lý Tài Khoản(TaiKhoan,MatKhau,SoDu,Bonus)
-+Tạo được các truy vấn: thêm tài khoản mới, nạp tiền vào tài khoản, thay đổi mật khẩu.
++Tạo các truy vấn liên quan, tạo hàm nếu có.
 
 -Tạo bảng Quản Lý Giao Dịch(TaiKhoan,LichSuNap,SoTienNap,Bonus)
 +Tạo các truy vấn liên quan, tạo hàm nếu có.
