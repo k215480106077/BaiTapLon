@@ -19,12 +19,12 @@ Quản lý tài khoản trong một quán net có thể được thực hiện q
 
 
 # Yêu cầu thực hiện:
--Tạo bảng Quản Lý Tài Khoản(TaiKhoan,MatKhau,SoDu,Bonus)
+-Tạo bảng Quản Lý Tài Khoản(TaiKhoan,MatKhau,SoDuChinh,SoDuPhu)
 +Tạo các truy vấn liên quan, tạo hàm nếu có.
 
--Tạo bảng Quản Lý Giao Dịch(TaiKhoan,LichSuNap,SoTienNap,Bonus)
+-Tạo bảng Quản Lý Giao Dịch(TaiKhoan,LichSuNap,SoTienNap)
 +Tạo các truy vấn liên quan, tạo hàm nếu có.
 
--Tạo bảng Quản Lý Máy Tính(TaiKhoanDangDung,IDmaytinh,SoDu,Bonus,TrangThaiMayTinh)
+-Tạo bảng Quản Lý Máy Tính(TaiKhoanDangDung,IDmaytinh,SoDuChinh,SoDuPhu,TrangThaiMayTinh)
 +Tạo các truy vấn liên quan, tạo hàm nếu có.
 
