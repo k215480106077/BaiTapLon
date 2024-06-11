@@ -38,6 +38,63 @@ UPDATE QuanLyTaiKhoan
 SET MatKhau = N'newpassword'
 WHERE TaiKhoan = N'user1';
 
+--Tạo bảng Quản Lý Giao Dịch
+CREATE TABLE QuanLyGiaoDich (
+    TaiKhoan NVARCHAR(50) NOT NULL,
+    LichSuNap DATETIME NOT NULL,
+    SoTienNap MONEY NOT NULL,
+    FOREIGN KEY (TaiKhoan) REFERENCES QuanLyTaiKhoan(TaiKhoan)
+);
+
+CREATE PROCEDURE NapTien
+    @TaiKhoan NVARCHAR(50),
+    @SoTien MONEY
+AS
+BEGIN
+    -- Bắt đầu giao dịch
+    BEGIN TRANSACTION;
+
+    -- Kiểm tra xem tài khoản có tồn tại hay không
+    IF EXISTS (SELECT 1 FROM QuanLyTaiKhoan WHERE TaiKhoan = @TaiKhoan)
+    BEGIN
+        -- Cập nhật SoDuChinh
+        UPDATE QuanLyTaiKhoan
+        SET SoDuChinh = SoDuChinh + @SoTien
+        WHERE TaiKhoan = @TaiKhoan;
+
+        -- Tính toán SoDuPhu
+        DECLARE @SoDuPhu MONEY;
+        SET @SoDuPhu = @SoTien * 0.10;
+
+        -- Cập nhật SoDuPhu
+        UPDATE QuanLyTaiKhoan
+        SET SoDuPhu = SoDuPhu + @SoDuPhu
+        WHERE TaiKhoan = @TaiKhoan;
+
+        -- Chèn vào bảng giao dịch
+        INSERT INTO QuanLyGiaoDich (TaiKhoan, LichSuNap, SoTienNap)
+        VALUES (@TaiKhoan, GETDATE(), @SoTien);
+
+        -- Hoàn tất giao dịch
+        COMMIT TRANSACTION;
+    END
+    ELSE
+    BEGIN
+        -- Nếu tài khoản không tồn tại, rollback giao dịch
+        ROLLBACK TRANSACTION;
+        RAISERROR('Tai khoan khong ton tai', 16, 1);
+    END
+END;
+
+--Sử dụng hàm để nạp tiền vào tài khoản 'user2'
+EXEC NapTien @TaiKhoan = N'user2', @SoTien = 1000.00;
+--Lấy thông tin giao dịch 
+SELECT * FROM QuanLyGiaoDich
+--Lấy thông tin giao dịch của tài khoản cụ thể
+WHERE TaiKhoan = N'user2';
+
+
+
 
 
 
