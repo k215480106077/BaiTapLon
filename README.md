@@ -4,6 +4,7 @@ MSSV: K215480106077
 Lớp: K57KMT.01
 Đề tài: Quản lý tài khoản quán NET
 
+# Toàn bộ code trong SQL Server được up vào phần CODE
 
 # BaiTapLon
 Quản lý tài khoản trong một quán net có thể được thực hiện qua một hệ thống cơ sở dữ liệu quản lý các tài khoản người dùng, máy tính, dịch vụ sử dụng và thanh toán. Dưới đây là mô hình sau khi trải nghiệm ở các quán net( thực tế có thể sẽ khác so với mô hình):
