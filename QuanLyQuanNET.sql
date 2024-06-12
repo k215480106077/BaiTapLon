@@ -93,6 +93,64 @@ SELECT * FROM QuanLyGiaoDich
 --Lấy thông tin giao dịch của tài khoản cụ thể
 WHERE TaiKhoan = N'user2';
 
+--tạo bảng quản lý máy tính
+CREATE TABLE QuanLyMayTinh (
+    TaiKhoanDangDung NVARCHAR(50),
+    IDmaytinh INT PRIMARY KEY,
+    SoDuChinh MONEY,
+    SoDuPhu MONEY,
+    TrangThaiMayTinh NVARCHAR(50)
+);
+--cập nhật 5 máy tính mới
+INSERT INTO QuanLyMayTinh (IDmaytinh, TrangThaiMayTinh)
+VALUES
+    (1, N'Trống'),
+    (2, N'Trống'),
+    (3, N'Trống'),
+    (4, N'Trống'),
+    (5, N'Trống');
+
+--hàm đăng ký tài khoản mới
+CREATE PROCEDURE DangKyTaiKhoanMoi
+    @TaiKhoan NVARCHAR(50),
+    @MatKhau NVARCHAR(50),
+    @SoDuChinh MONEY,
+    @SoDuPhu MONEY
+AS
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM QuanLyTaiKhoan WHERE TaiKhoan = @TaiKhoan)
+    BEGIN
+        INSERT INTO QuanLyTaiKhoan (TaiKhoan, MatKhau, SoDuChinh, SoDuPhu)
+        VALUES (@TaiKhoan, @MatKhau, @SoDuChinh, @SoDuPhu);
+        SELECT 1; -- Trả về 1 nếu đăng ký thành công
+    END
+    ELSE
+    BEGIN
+        SELECT 0; -- Trả về 0 nếu tài khoản đã tồn tại
+    END
+END;
+
+--sử dụng hàm để đăng ký tài khoản mới
+DECLARE @Result INT;
+
+EXEC @Result = DangKyTaiKhoanMoi N'user4', N'password4', 1000.00, 100.00;
+
+IF @Result = 1
+BEGIN
+    PRINT 'Đăng ký tài khoản mới thành công.';
+END
+ELSE IF @Result = 0
+BEGIN
+    PRINT 'Tài khoản đã tồn tại, không thể đăng ký.';
+END
+
+
+
+
+
+
+
+
 
 
 
