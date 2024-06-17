@@ -4,9 +4,7 @@
 # Lớp: K57KMT.01
 # Đề tài: Quản lý kho xưởng cafe
 # Các chức năng
-quản lý kho
-quản lý nhập hàng
-quản lý xuất hàng
+Quản lý số lượng kho hàng, tự động tính toán đơn vị số lượng.
 
 # --Toàn bộ code trong SQL Server được up vào file.zip, code chỉ sử dụng cho SQL Server.
 
